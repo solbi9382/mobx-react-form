@@ -7,7 +7,7 @@ orbs:
   node: circleci/node@4.7
 
 jobs:
-  build:
+  release:
     docker:
       - image: alpine:3.7
     steps:
@@ -40,3 +40,4 @@ workflows:
           version: "16.10"
           # If you are using yarn, change the line below from "npm" to "yarn"
           pkg-manager: npm
+      - release
