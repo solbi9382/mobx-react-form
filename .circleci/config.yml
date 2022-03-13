@@ -19,3 +19,11 @@ workflows:
           version: "16.10"
           # If you are using yarn, change the line below from "npm" to "yarn"
           pkg-manager: npm
+          steps:
+            - release
+            - run: npm run cover
+            - run: npm run coverage:check
+            - run: npm run build
+            - run: npm run build
+            - run: npm run coverage:report
+            - run: npm run semantic-release
