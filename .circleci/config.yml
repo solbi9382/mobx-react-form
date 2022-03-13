@@ -12,6 +12,9 @@ jobs:
       - image: alpine:3.7
     steps:
       - run:
+          name: install
+          command: sudo npm install -g npm@16.10 && npm install
+      - run:
           name: cover
           command: npm run cover
       - run:
