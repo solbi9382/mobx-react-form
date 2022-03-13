@@ -6,6 +6,27 @@ version: 2.1
 orbs:
   node: circleci/node@4.7
 
+jobs:
+  build:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: cover
+          command: npm run cover
+      - run:
+          name: coverage:check
+          command: npm run coverage:check
+      - run:
+          name: build
+          command: npm run build
+      - run:
+          name: coverage:report
+          command: npm run coverage:report
+      - run:
+          name: semantic-release
+          command: npm run semantic-release
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -19,11 +40,3 @@ workflows:
           version: "16.10"
           # If you are using yarn, change the line below from "npm" to "yarn"
           pkg-manager: npm
-          steps:
-            - release
-            - run: npm run cover
-            - run: npm run coverage:check
-            - run: npm run build
-            - run: npm run build
-            - run: npm run coverage:report
-            - run: npm run semantic-release
